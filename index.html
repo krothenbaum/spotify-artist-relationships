@@ -27,6 +27,9 @@
     <div class="get-recs">
       <input type="submit" id="get-recs" class="btn hidden" value="Get Matches" />
     </div>
+    <div class="get-next-degree">
+      <input type="submit" id="get-next-degree" class="btn hidden" value="Next Degree" />
+    </div>
     <div class="relationship">
       <div class="row">
         <div class="matched-artists col s12"></div>
@@ -35,9 +38,12 @@
 
     <div id="results">
     	<div class="row">
-    		<div class="artist-1-recs col s4"></div>
-    		<div class="artist-2-recs col s4"></div>
-        <div class="artist-final-recs col s4"></div>
+    		<div class="firstDegree col s2"></div>
+    		<div class="secondDegree col s2"></div>
+        <div class="thirdDegree col s2"></div>
+        <div class="fourthDegree col s2"></div>
+        <div class="fifthDegree col s2"></div>
+        <div class="sixthDegree col s2"></div>
     	</div>
     </div>
   </div>
@@ -48,7 +54,7 @@
   <script id="results-template" type="text/x-handlebars-template">
     {{#each artists}}
       <div artist-id="{{id}}" class="cover">
-    	 <h5>{{name}}</h5>
+    	 <p>{{name}}</p>
       </div>
     {{/each}}
   </script>
