@@ -1,8 +1,8 @@
-var DEGREES = 3; //Maximum levels queried; starts at zero
+var DEGREES = 2; //Maximum levels queried; starts at zero
 
 var MAXARTISTS = 2;
 
-var ARTISTS = new Array();  //Multidimensional array with the number of potential 'artists' i.e. compare Madonna, to Beethoven to Eminem to nth-artist
+var ARTISTS = [];  //Multidimensional array with the number of potential 'artists' i.e. compare Madonna, to Beethoven to Eminem to nth-artist
 
 
 
@@ -11,15 +11,14 @@ $(function(){
 	//get input from User and call nextLevel for each Artist building a relationship tree equal to the number of Degrees
 })
 
-var nextLevel = function(artist, degree){ //Recursion 
+var nextLevel = function(degree){ //Recursion 
 	if( degree == DEGREES ){
 		console.log(ARTISTS);
-		return console.log('max level');
-		
+		return console.log('max level');		
 	} else {
 		return setTimeout(function() {  //setTimeout not necessary, just for clairity and potential visual FX
-				addNewArtist('alkaline trio',degree);	//manually seed artist for testing
-				nextLevel(degree+1) ;	
+				addNewArtist('alkaline trio', degree);	//manually seed artist for testing
+				nextLevel(degree+1); 	
 		},500)
 	}
 }
@@ -31,7 +30,7 @@ function addNewArtist(artist, degree){
 		searchArtist(artist, degree);
 	} else {
 		ARTISTS[degree].artists.forEach(function(item) {
-		searchRecommendations(item.id, degree);
+			searchRecommendations(item.id, degree);
 		});
 	}
 }
@@ -60,6 +59,7 @@ function searchRecommendations(artist, degree) {
 			type: 'artist',
 		},
 		success: function (response) {
+			//add the result to next index in the array
 			ARTISTS.splice((degree+1), 0, response);
 		}		
 	});	
