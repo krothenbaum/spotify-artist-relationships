@@ -1,4 +1,4 @@
-var DEGREES = 2; //Maximum levels queried; starts at zero
+var DEGREES = 5; //Maximum levels queried; starts at zero
 
 var MAXARTISTS = 2;
 
@@ -24,7 +24,7 @@ var nextLevel = function(degree){ //Recursion
 }
 
 
-
+//first degree find the single artist. Following degree search recommendations for each artist in that degree's Array index
 function addNewArtist(artist, degree){
 	if (degree === 0) {
 		searchArtist(artist, degree);
@@ -61,6 +61,7 @@ function searchRecommendations(artist, degree) {
 		success: function (response) {
 			//add the result to next index in the array
 			ARTISTS.splice((degree+1), 0, response);
+			//instead of splicing the results to the array and increasing its length I would like to append the results to the current index.
 		}		
 	});	
 }
