@@ -15,7 +15,7 @@ var nextLevel = function(degree){ //Recursion
 	if( degree == DEGREES ){
 		setTimeout(function() {
 			renderResults();
-			return console.log('max level');			
+			return console.log('max level');
 		}, 1000);
 	} else {
 		return setTimeout(function() {  //setTimeout not necessary, just for clairity and potential visual FX
@@ -31,7 +31,7 @@ function addNewArtist(artist, degree){
 		searchArtist(artist, degree);
 	} else {
 		ARTISTS[degree].artists.forEach(function(item) {
-			searchRecommendations(item.id, degree);
+				searchRecommendations(item.id, degree);
 		});
 	}
 }
@@ -60,15 +60,16 @@ function searchRecommendations(artist, degree) {
 			type: 'artist',
 		},
 		success: function (response) {
-			//add the result to next index in the array
-			var tempArr = response;
-			for(var i = 0; i < tempArr.artists.length; i++) {
-				if(IDS.indexOf(tempArr.artists[i].id) != -1) {
-					tempArr.artists.splice(i, 1);
-				} else {
-					IDS.push(tempArr.artists[i].id);
-				}
+			//check if artist id is in ID array, remove if so, add if not
+			console.log(typeof response);
+			var tempArr = [];
+			for(var i = 0; i < response.artists.length; i++) {
+				if(IDS.indexOf(response.artists[i].id) == -1) {
+					IDS.push(response.artists[i].id);
+					tempArr.push(response.artists[i]);
+				} 
 			}
+			// add the result to next index in the array
 			ARTISTS.push(tempArr);
 		}		
 	});	
@@ -82,7 +83,7 @@ function renderResults() {
 		} else if (i === 1) {
 			var secondHTML = '';
 			ARTISTS[i].artists.forEach(function(artist) {
-				secondHTML = '<h5>' + artist.name + '</h5>';
+				secondHTML = '<h5 class="truncate">' + artist.name + '</h5>';
 				$('.second-degree').append(secondHTML);
 			});			
 		} else {

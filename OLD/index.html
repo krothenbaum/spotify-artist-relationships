@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" name="description" content="Six Degrees of Spotify">
+  <title>Six Degrees of Spotify</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="container">
+    <h1>Search for Artist relationships</h1>
+    <p>Enter artists into each field and click "Search".</p>
+    <form name="artist-form">
+    	<div class="input-field">
+        <input type="text" id="artist-1-query" value="" class="form-control" placeholder="First Artist"/>
+      </div>
+      <div class="input-field">
+        <input type="text" id="artist-2-query" value="" class="form-control" placeholder="Second Artist"/>
+      </div>
+        <input type="submit" id="search" class="btn" value="Search" />
+    </form>
+    <div class="get-recs">
+      <input type="submit" id="get-recs" class="btn hidden" value="Get Matches" />
+    </div>
+    <div class="get-next-degree">
+      <input type="submit" id="get-next-degree" class="btn hidden" value="Next Degree" />
+    </div>
+    <div class="relationship">
+      <div class="row">
+        <div class="matched-artists col s12"></div>
+      </div>
+    </div>
+
+    <div id="results">
+    	<div class="row">
+    		<div class="first-Degree col s2"></div>
+    		<div class="second-Degree col s2"></div>
+        <div class="third-Degree col s2"></div>
+        <div class="fourth-Degree col s2"></div>
+        <div class="fifth-Degree col s2"></div>
+        <div class="sixth-Degree col s2"></div>
+    	</div>
+    </div>
+  </div>
+  <!-- link to jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+  <script id="results-template" type="text/x-handlebars-template">
+    {{#each artists}}
+      <div artist-id="{{id}}" class="cover">
+    	 <p>{{name}}</p>
+      </div>
+    {{/each}}
+  </script>
+  <!-- link to your app.js -->
+  <script src="app.js"></script>
+
+</body>
+</html>
