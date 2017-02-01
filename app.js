@@ -3,13 +3,15 @@ var FIRSTIDS = [];
 var SECONDIDS = [];
 var ARTISTS = [];
 $(function(){
-	addNewArtist('alkaline trio', 0, 1);
-	addNewArtist('none more black', 0, 2);
+	$('form[name="artist-form"]').submit(function (e) {
+		e.preventDefault();
+		addNewArtist($(this).find('#artist-1-query').val(), 0, 1);
+		addNewArtist($(this).find('#artist-2-query').val(), 0, 2);
 
-	setTimeout (function () {
-		renderMatches();
-	}, 2000);
-	
+		setTimeout (function () {
+			renderMatches();
+		}, 2000);
+	});
 })
 
 
@@ -80,7 +82,7 @@ function searchRecommendations(artist, degree, artistCount) {
 								ARTISTS.push(this); //You can add unique identifiers here, depending on degree #.
 								searchRecommendations(this.id, degree+1, artistCount);
 							}
-						} else if (SECONDIDS.indexOf(this.id) == -1) {
+						} else if (SECONDIDS.indexOf(this.id) == -1 && artistCount == 2) {
 								if (degree == 0) {
 									var fifthHTML = '<h5 style="color:'+color+'">' + this.name + '</h5>';
 									$('.fifth-degree').append(fifthHTML);

@@ -13,8 +13,21 @@
 </head>
 <body>
 <div class="container">
-	<h1>Recursion</h1>
-	<div class="matches hidden">
+	<h1>Six Degrees of Spotify</h1>
+		<div class="row">
+			<div class="user-input col s12">
+			 <form name="artist-form">
+    	<div class="input-field">
+      <input type="text" id="artist-1-query" value="" class="form-control" placeholder="First Artist"/>
+    	</div>
+     <div class="input-field">
+      <input type="text" id="artist-2-query" value="" class="form-control" placeholder="Second Artist"/>
+     </div>
+      <input type="submit" id="search" class="btn" value="Search" />
+    </form>				
+			</div>
+		</div>
+		<div class="matches hidden">
 		<div class="row">
 			<div class="matched-artists col s12"></div>
 		</div>
