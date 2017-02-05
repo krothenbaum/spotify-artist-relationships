@@ -67,3 +67,27 @@ body {
 .hidden {
 	display: none;
 }
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: rgb(200, 200, 200);
+  stroke: #0AEB60;
+  stroke-width: 1.5px;
+}
+
+.node img {
+
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
