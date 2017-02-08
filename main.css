@@ -91,3 +91,19 @@ body {
   stroke: #ccc;
   stroke-width: 1.5px;
 }
+
+.tree-result {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.first-tree {
+	border: 2px solid white;
+	float: left;
+}
+
+.second-tree {
+	border: 2px solid white;
+	float: right;
+}
