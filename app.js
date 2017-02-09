@@ -19,18 +19,6 @@ $(function(){
 	});
 })
 
-
-//first degree find the single artist. Following degree search recommendations for each artist in that degree's Array index
-// function addNewArtist(artist, degree, artistCount){
-// 	if (degree === 0) {
-// 		searchArtist(artist, degree, artistCount);
-// 	} else {
-// 		ARTISTS[degree].artists.forEach(function(item) {
-// 			searchRecommendations(item.id, degree);
-// 		});
-// 	}
-// }
-
 //search for the artist the user inputs
 function searchArtist(artist, degree, artistCount) {
 	$.ajax({
@@ -140,7 +128,7 @@ function getTracks(artistId) {
 function renderTree() {
 	var margin = {top: 120, right: 20, bottom: 20, left: 140},
 	width = ($(window).width() / 3) - margin.right - margin.left,
-	height = $(window).height();
+	height = 800;
 
 	var i = 0,
 	duration = 750,
@@ -156,9 +144,9 @@ function renderTree() {
 	.attr("width", width + margin.right + margin.left)
 	.attr("height", height)
 	.append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	.attr("transform", "translate(" + margin.left + "," + (height / 4) + ")");
 
-  // if (error) throw error;
+
   root = FIRSTMUSICIANS;
   root.x0 = height / 2;
   root.y0 = height;
@@ -172,7 +160,6 @@ function renderTree() {
   }
   root.children.forEach(collapse);
   update(root);
-//});
 
 d3.select(self.frameElement).style("height", "800px");
 
@@ -271,13 +258,6 @@ function update(source) {
   	return diagonal({source: o, target: o});
   });
 
-  link.enter().insert("path", "g")
-  .attr("class", "link")
-  .attr("d", function(d) {
-  	var o = {x: source.x0, y: source.y0};
-  	return diagonal({source: o, target: o});
-  });
-
   // Transition links to their new position.
   link.transition()
   .duration(duration)
@@ -287,7 +267,7 @@ function update(source) {
   link.exit().transition()
   .duration(duration)
   .attr("d", function(d) {
-  	var o = {x: source.x, y: source.y};;
+  	var o = {x: source.x0, y: source.y0};
   	return diagonal({source: o, target: o});
   })
   .remove();
@@ -317,7 +297,7 @@ function click(d) {
 function renderSecondTree() {
 	var margin = {top: 120, right: 140	, bottom: 20, left: 20},
 	width = ($(window).width() / 3) - margin.right - margin.left,
-	height = $(window).height() - margin.top - margin.bottom;
+	height = 800;
 
 	var i = 0,
 	duration = 750,
@@ -325,7 +305,6 @@ function renderSecondTree() {
 
 	var tree = d3.layout.tree()
 	.size([width, height]);
-	// .nodeSize([72, 72]);
 
 	var diagonal = d3.svg.diagonal()
 	.projection(function(d) { return [d.y, d.x]; });
@@ -333,9 +312,9 @@ function renderSecondTree() {
 	var svg = d3.select(".second-tree").append("svg")
 	.attr("class", "float-right")
 	.attr("width", width + margin.right + margin.left)
-	.attr("height", height + margin.top + margin.bottom)
+	.attr("height", height)
 	.append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	.attr("transform", "translate(" + margin.left + "," + (height / 4) + ")");
 
   // if (error) throw error;
   root = SECONDMUSICIANS;
@@ -443,13 +422,6 @@ function update(source) {
   .data(links, function(d) { return d.target.id; });
 
   // Enter any new links at the parent's previous position.
-  link.enter().insert("path", "g")
-  .attr("class", "link")
-  .attr("d", function(d) {
-  	var o = {x: source.x0, y: source.y0};
-  	return diagonal({source: o, target: o});
-  });
-
   link.enter().insert("path", "g")
   .attr("class", "link")
   .attr("d", function(d) {
