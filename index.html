@@ -5,39 +5,46 @@
   <meta charset="utf-8" name="description" content="Six Degrees of Spotify">
   <title>Six Degrees of Spotify</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+<!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="edge.css">
 
-  <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <div class="container">
-	<h1>Six Degrees of Spotify</h1>
+	<!-- <div class="circle hidden"></div> -->
+	<div class="input">
 		<div class="row">
 			<div class="user-input col s12">
 			 <form name="artist-form">
     	<div class="input-field">
-      <input type="text" id="artist-1-query" value="the beatles" class="form-control" placeholder="First Artist"/>
+      <input type="text" id="artist-1-query" value="circa survive" class="form-control" placeholder="First Artist"/>
     	</div>
      <div class="input-field">
-      <input type="text" id="artist-2-query" value="the beach boys" class="form-control" placeholder="Second Artist"/>
+      <input type="text" id="artist-2-query" value="sunny day real estate" class="form-control" placeholder="Second Artist"/>
      </div>
       <input type="submit" id="search" class="btn" value="Search" />
     </form>				
 			</div>
 		</div>
+	</div>
+	<div class="results"></div>
+	<div class="artistInfo hidden">
 		<div class="row">
-			<div class="tree-results col s12">
-				<div class="first-tree"></div>
-				<div class="second-tree"></div>
-			</div>
+			<div class="artistImage"></div>
+			<div class="artistName"></div>
 		</div>
+		<div class="row">
+			<div class="tracks"></div>
+		</div>
+	</div>
 </div>
-  <!-- link to your app.js -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
   <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="app.js"></script>
-
+  <script src="edge2.js"></script>
 </body>
 </html>

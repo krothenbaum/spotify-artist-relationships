@@ -13,52 +13,34 @@
 </head>
 <body>
 <div class="container">
-    <h1>Search for Artist relationships</h1>
-    <p>Enter artists into each field and click "Search".</p>
-    <form name="artist-form">
+	<h1>Six Degrees of Spotify</h1>
+		<div class="row">
+			<div class="user-input col s12">
+			 <form name="artist-form">
     	<div class="input-field">
-        <input type="text" id="artist-1-query" value="" class="form-control" placeholder="First Artist"/>
-      </div>
-      <div class="input-field">
-        <input type="text" id="artist-2-query" value="" class="form-control" placeholder="Second Artist"/>
-      </div>
-        <input type="submit" id="search" class="btn" value="Search" />
-    </form>
-    <div class="get-recs">
-      <input type="submit" id="get-recs" class="btn hidden" value="Get Matches" />
-    </div>
-    <div class="get-next-degree">
-      <input type="submit" id="get-next-degree" class="btn hidden" value="Next Degree" />
-    </div>
-    <div class="relationship">
-      <div class="row">
-        <div class="matched-artists col s12"></div>
-      </div>
-    </div>
-
-    <div id="results">
-    	<div class="row">
-    		<div class="first-Degree col s2"></div>
-    		<div class="second-Degree col s2"></div>
-        <div class="third-Degree col s2"></div>
-        <div class="fourth-Degree col s2"></div>
-        <div class="fifth-Degree col s2"></div>
-        <div class="sixth-Degree col s2"></div>
+      <input type="text" id="artist-1-query" value="the beatles" class="form-control" placeholder="First Artist"/>
     	</div>
-    </div>
-  </div>
-  <!-- link to jquery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-
-  <script id="results-template" type="text/x-handlebars-template">
-    {{#each artists}}
-      <div artist-id="{{id}}" class="cover">
-    	 <p>{{name}}</p>
-      </div>
-    {{/each}}
-  </script>
+     <div class="input-field">
+      <input type="text" id="artist-2-query" value="the beach boys" class="form-control" placeholder="Second Artist"/>
+     </div>
+      <input type="submit" id="search" class="btn" value="Search" />
+    </form>				
+			</div>
+		</div>
+		<div class="row">
+			<div class="tree-results col s12">
+				<div class="first-tree"></div>
+				<div class="second-tree"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="matches col s12 hidden">
+			</div>
+		</div>
+</div>
   <!-- link to your app.js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="app.js"></script>
 
 </body>
