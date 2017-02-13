@@ -21,10 +21,10 @@
 		<div class="row">
 			<div class="user-input col s12">
 			 <form name="artist-form">
-    	<div class="input-field">
+    	<div class="input-field col s4">
       <input type="text" id="artist-1-query" value="circa survive" class="form-control" placeholder="First Artist"/>
     	</div>
-     <div class="input-field">
+     <div class="input-field col s4">
       <input type="text" id="artist-2-query" value="sunny day real estate" class="form-control" placeholder="Second Artist"/>
      </div>
       <input type="submit" id="search" class="btn" value="Search" />
@@ -35,11 +35,13 @@
 	<div class="results"></div>
 	<div class="artistInfo hidden">
 		<div class="row">
-			<div class="artistImage"></div>
 			<div class="artistName"></div>
+			<div class="artistImage"></div>			
 		</div>
 		<div class="row">
-			<div class="tracks"></div>
+			<div class="tracks">
+				<ol class="tracksList"></ol>
+			</div>
 		</div>
 	</div>
 </div>

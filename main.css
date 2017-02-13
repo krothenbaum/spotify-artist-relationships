@@ -69,20 +69,19 @@ body {
   z-index: 1;
   position: relative;
   margin: auto;
-  width: 600px;
-  height: 600px;
+  width: 480px;
+  height: auto;
   background-color: rgb(24, 24, 24);
-  -moz-border-radius: 300px;
+/*  -moz-border-radius: 300px;
   -webkit-border-radius: 300px;
-  border-radius: 300px;
+  border-radius: 300px;*/
   color: #fff;
   border: 1px solid rgb(170, 170, 170);
+  padding: 24px;
 }
 
 .artistImage {
     position: relative;
-    margin-top: 104px;
-    margin-left: 104px;
     display: inline-block;
     width: 128px;
     height: 128px;
@@ -93,12 +92,36 @@ body {
 
 .artistName {
   position: relative;
+  margin: 0;
   width: 256px;
-  top: -96px;
+  /*top: -96px;*/
   margin-left: 16px;
   display: inline-block;
 }
 
 .tracks {
+  padding: 0;
+  margin: 0;
   color: #fff;
+}
+
+.tracksList ol {
+  padding-left: 1.5em; 
+  list-style: decimal;
+}
+
+.tracksList li {
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #282828;
+}
+
+.tracksList li:first-child {
+  border-top: 1px solid #282828;
+}
+
+.playing {
+  background-color: #282828;
+  color: #1ED760;
 }

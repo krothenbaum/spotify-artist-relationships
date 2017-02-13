@@ -73,7 +73,6 @@ function getTracks(artistId, index) {
         country: 'US'
       }}));
   trackPromise.then(function(response) {
-    console.log(response);
     ARTISTS[index].tracks = response.tracks;
   });
 }
@@ -215,21 +214,19 @@ function packageImports(nodes) {
     });
   });
   return imports;
-  console.log(imports);
 }
 
 function click(d) {
   var tracksHTML = '';
-  var index = ARTISTS.findIndex(x => x.artistId == d.artistId);;
-  playPreview(d.artistId, index);
+  var index = ARTISTS.findIndex(x => x.artistId == d.artistId);
   $('.artistImage').css({'background-image': 'url(' + d.imageURL +')'});
   $('.artistName').html('<h5>' + d.name +'</h5>');
   $(d.tracks).each(function (){
-    tracksHTML = tracksHTML + '<p class="truncate">' + this.name + '</p>';
+    tracksHTML = tracksHTML + '<li class="truncate" id="' + this.id + '">' + this.name + '</li>';
   });
-  $('.tracks').html(tracksHTML);
+  $('.tracksList').html(tracksHTML);
   $('.artistInfo').removeClass('hidden');
-
+  playPreview(d.artistId, index);
 }
 
 function playPreview(artistId, index) {
@@ -237,12 +234,10 @@ function playPreview(artistId, index) {
     AUDIOOBJ.pause();
   }
 
-  // var index = ARTISTS.findIndex(x => x.artistId == artistId);
-    // ARTISTS[index].tracks = response.tracks;
-    // console.log(ARTISTS[index]);
   var trackNumber = Math.floor(Math.random() * ARTISTS[index].tracks.length);
   AUDIOOBJ.setAttribute('src', ARTISTS[index].tracks[trackNumber].preview_url);
-  AUDIOOBJ.volume = 0.1;
+  $('#' + ARTISTS[index].tracks[trackNumber].id).addClass('playing');
+  AUDIOOBJ.volume = 0.05;
   AUDIOOBJ.load();
   AUDIOOBJ.play();
 }
