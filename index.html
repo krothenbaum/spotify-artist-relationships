@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="utf-8" name="description" content="Six Degrees of Spotify">
-  <title>Six Degrees of Spotify</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8" name="description" content="Spotify Artist Relationships">
+	<title>Spotify Artist Relationships</title>
 
-<!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
 
-</head>
-<body>
-<div class="container">
-	<!-- <div class="circle hidden"></div> -->
-	<div class="input">
-		<div class="row">
-			<div class="user-input col s12">
-			 <form name="artist-form">
-    	<div class="input-field col s4">
-      <input type="text" id="artist-1-query" value="circa survive" class="form-control" placeholder="First Artist"/>
-    	</div>
-     <div class="input-field col s4">
-      <input type="text" id="artist-2-query" value="sunny day real estate" class="form-control" placeholder="Second Artist"/>
-     </div>
-      <input type="submit" id="search" class="btn" value="Search" />
-    </form>				
-			</div>
-		</div>
+ </head>
+ <body>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<!-- <h1 class="navbar-brand navbar-text"><i class="fa fa-spotify fa-3x" aria-hidden="true"></i>Spotify Artist Relationships</h1> -->
+	<div class="navbar-brand">
+		<i class="fa fa-spotify fa-3x" aria-hidden="true"></i>
 	</div>
-	<div class="results"></div>
-	<div class="artistInfo hidden">
-		<div class="row">
-			<div class="artistName"></div>
-			<div class="artistImage"></div>			
-		</div>
-		<div class="row">
-			<div class="tracks">
-				<ol class="tracksList"></ol>
+	<div class="container">
+					
+		<form class="navbar-form align-middle" role="search" name="artist-form">
+			<div class="form-group">
+				<input type="text" id="artist-1-query" value="The Beatles" class="form-control" placeholder="First Artist"/>
+			</div>
+			<div class="form-group">
+				<input type="text" id="artist-2-query" value="The Beach Boys" class="form-control" placeholder="Second Artist"/>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+</nav>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="results col-md-8 col-sm-8"></div>
+		<div class="artistInfo hidden col-md-3 col-sm-2 col-xs-1 pull-right">
+			<div class="row">
+				<div class="artistImage"></div>
+				<div class="artistName"></div>
+			</div>
+			<div class="row">
+				<div class="tracks">
+					<!-- <ul class="tracksList"></ul> -->
+				</div>		
 			</div>
 		</div>
 	</div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="app.js"></script>
-</body>
-</html>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<script src="app.js"></script>
+	</body>
+	</html>

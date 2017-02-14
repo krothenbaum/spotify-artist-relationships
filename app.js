@@ -10,12 +10,11 @@ function searchArtistByName(artistName, index, degree) {
       type: 'artist'
     }}));    
     artistPromise.then(function (response) {
-      
-        ARTISTIDS.push(response.artists.items[0].id);
-        ARTISTS.push({'name': response.artists.items[0].name, 'imports': [], 'artistId': response.artists.items[0].id, 'imageURL': response.artists.items[0].images[0].url, 'imageHeight': response.artists.items[0].images[0].height, 'imageWidth': response.artists.items[0].images[0].width});
-        index = ARTISTS.findIndex(x => x.name == response.artists.items[0].name);
-        getTracks(response.artists.items[0].id, index);
-        searchRecommendations(response.artists.items[0].id, index, degree);
+      ARTISTIDS.push(response.artists.items[0].id);
+      ARTISTS.push({'name': response.artists.items[0].name, 'imports': [], 'artistId': response.artists.items[0].id, 'imageURL': response.artists.items[0].images[0].url, 'imageHeight': response.artists.items[0].images[0].height, 'imageWidth': response.artists.items[0].images[0].width});
+      index = ARTISTS.findIndex(x => x.name == response.artists.items[0].name);
+      getTracks(response.artists.items[0].id, index);
+      searchRecommendations(response.artists.items[0].id, index, degree);
     }, function (error) {
         console.error('uh oh: ', error);   // 'uh oh: something bad happened’
     });
@@ -67,35 +66,19 @@ function searchRecommendations(artistId, index, degree) {
 }
 
 function getTracks(artistId, index) {
-  var trackPromise = Promise.resolve($.ajax({
-      url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
-      data: {
-        country: 'US'
-      }}));
-  trackPromise.then(function(response) {
-    ARTISTS[index].tracks = response.tracks;
-  });
+  if(!ARTISTS[index].tracks) {
+    var trackPromise = Promise.resolve($.ajax({
+        url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
+        data: {
+          country: 'US'
+        }}));
+    trackPromise.then(function(response) {
+      ARTISTS[index].tracks = response.tracks;
+    });
+  } else {
+    return;
+  }
 }
-
-$(document).ready(function() {
-  $('form[name="artist-form"]').submit(function (e) {
-    e.preventDefault();
-    var index,
-        degree = 0;
-    searchArtistByName($(this).find('#artist-1-query').val(), index, degree);
-    var artist2 = $(this).find('#artist-2-query').val();
-    setTimeout (function () {
-      searchArtistByName(artist2, index, degree);
-    }, 2000);
-
-    setTimeout (function () {
-      renderCircle();
-      console.log(ARTISTS);
-    }, 3000);
-  });
-})
-
-
 
 function renderCircle() {
 var diameter = $(window).height(),
@@ -115,10 +98,13 @@ var line = d3.svg.line.radial()
     .radius(function(d) { return d.y; })
     .angle(function(d) { return d.x / 180 * Math.PI; });
 
-var svg = d3.select(".results").append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-  .append("g")
+var svg = d3.select('.results')
+    .append("svg")
+    .attr("width", '100%')
+    .attr("height", '100%')
+    .attr('viewBox','0 0 '+ diameter +' '+ diameter )
+    .attr('preserveAspectRatio','xMinYMin')
+    .append("g")
     .attr("transform", "translate(" + radius + "," + radius + ")");
 
 var link = svg.append("g").selectAll(".link"),
@@ -218,13 +204,15 @@ function packageImports(nodes) {
 
 function click(d) {
   var tracksHTML = '';
+  var i = 0;
   var index = ARTISTS.findIndex(x => x.artistId == d.artistId);
   $('.artistImage').css({'background-image': 'url(' + d.imageURL +')'});
-  $('.artistName').html('<h5>' + d.name +'</h5>');
+  $('.artistName').html('<h2>' + d.name +'</h2>');
   $(d.tracks).each(function (){
-    tracksHTML = tracksHTML + '<li class="truncate" id="' + this.id + '">' + this.name + '</li>';
+    i++;
+    tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '">' + i + '   ' + this.name + '</div>';
   });
-  $('.tracksList').html(tracksHTML);
+  $('.tracks').html(tracksHTML);
   $('.artistInfo').removeClass('hidden');
   playPreview(d.artistId, index);
 }
@@ -237,9 +225,32 @@ function playPreview(artistId, index) {
   var trackNumber = Math.floor(Math.random() * ARTISTS[index].tracks.length);
   AUDIOOBJ.setAttribute('src', ARTISTS[index].tracks[trackNumber].preview_url);
   $('#' + ARTISTS[index].tracks[trackNumber].id).addClass('playing');
-  AUDIOOBJ.volume = 0.05;
+  AUDIOOBJ.volume = 0.1;
   AUDIOOBJ.load();
   AUDIOOBJ.play();
 }
 }
-// }
+
+$(document).ready(function() {
+  $('form[name="artist-form"]').submit(function (e) {
+    e.preventDefault();
+    AUDIOOBJ.pause();
+    ARTISTS = [];
+    ARTISTIDS = [];
+    $('.results').empty();
+    $('.artistInfo').addClass('hidden');
+    
+    var index,
+        degree = 0;
+    
+    searchArtistByName($(this).find('#artist-1-query').val(), index, degree);
+    var artist2 = $(this).find('#artist-2-query').val();
+    setTimeout (function () {
+      searchArtistByName(artist2, index, degree);
+    }, 1000);
+
+    setTimeout (function () {
+      renderCircle();
+    }, 2000);
+  });
+})

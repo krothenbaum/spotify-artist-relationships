@@ -3,13 +3,10 @@
 }
 
 body {
+  font-family: "Roboto", sans-serif;
   background-color: rgb(24, 24, 24);
   padding: 20px;
   color: rgb(200, 200, 200);
-}
-
-.container {
-  overflow: visible;
 }
 
 .node {
@@ -19,6 +16,7 @@ body {
 
 .node:hover {
   fill: #fff;
+  cursor: pointer;
 }
 
 .link {
@@ -60,23 +58,79 @@ body {
   display: none;
 }
 
+.navbar {
+  background-color: rgb(40, 40, 40);
+  border-color: rgb(40, 40, 40);
+}
+
+input {
+  border-radius: 15px;
+  border: none;
+  background-color: #fff;
+}
+
+input:focus { 
+  background-color: white;
+}
+
+form {
+  display: inline-block;
+}
+
 .results {
-  z-index: -1;
-  overflow: visible;
+  margin: 80px auto;  
+}
+
+.navbar {
+  min-height: 80px;
+  /*display: inline-block;*/
+}
+
+.navbar h1 {
+  margin: 0;
+  padding: 0;
+/*  display: inline-block;
+  vertical-align: middle;*/
+  font-size: 24px;
+}
+
+.navbar-brand {
+  display: inline-flex;
+}
+
+.fa-spotify {
+  color: #1ED760;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.btn {
+  margin-left: 16px;
+  color: #fff;
+  background-color: #1ED760;
+  border: 1px solid #1ed760;
+  border-radius: 20px;
+  height: 27px;
+  align-items: center; 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 11px;
+  outline: none;
+}
+
+.btn:hover {
+  color: #fff;
+  background: #43e57d;
+  border: 1px solid #43e57d;
+  cursor: pointer;
 }
 
 .artistInfo {
-  z-index: 1;
-  position: relative;
-  margin: auto;
-  width: 480px;
+  position: fixed;
+  margin: 80px auto;
+  right: 0;
   height: auto;
-  background-color: rgb(24, 24, 24);
-/*  -moz-border-radius: 300px;
-  -webkit-border-radius: 300px;
-  border-radius: 300px;*/
   color: #fff;
-  border: 1px solid rgb(170, 170, 170);
   padding: 24px;
 }
 
@@ -85,16 +139,15 @@ body {
     display: inline-block;
     width: 128px;
     height: 128px;
-    /*border-radius: 50%;*/
     background-position: center center;
     background-size: cover;
 }
 
 .artistName {
-  position: relative;
+  position: absolute;
+  top: 0;
   margin: 0;
   width: 256px;
-  /*top: -96px;*/
   margin-left: 16px;
   display: inline-block;
 }
@@ -105,19 +158,14 @@ body {
   color: #fff;
 }
 
-.tracksList ol {
-  padding-left: 1.5em; 
-  list-style: decimal;
-}
-
-.tracksList li {
+.tracksList {
   font-size: 14px;
   padding-top: 8px;
   padding-bottom: 8px;
   border-bottom: 1px solid #282828;
 }
 
-.tracksList li:first-child {
+.tracksList:first-child {
   border-top: 1px solid #282828;
 }
 
