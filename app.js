@@ -11,9 +11,13 @@ function searchArtistByName(artistName, index, degree) {
     }}));    
     artistPromise.then(function (response) {
       ARTISTIDS.push(response.artists.items[0].id);
-      ARTISTS.push({'name': response.artists.items[0].name, 'imports': [], 'artistId': response.artists.items[0].id, 'imageURL': response.artists.items[0].images[0].url, 'imageHeight': response.artists.items[0].images[0].height, 'imageWidth': response.artists.items[0].images[0].width});
+      if (response.artists.items[0].images.length > 0) {
+        ARTISTS.push({'name': response.artists.items[0].name, 'imports': [], 'artistId': response.artists.items[0].id, 'imageURL': response.artists.items[0].images[0].url});
+      } else {
+        ARTISTS.push({'name': response.artists.items[0].name, 'imports': [], 'artistId': response.artists.items[0].id, 'imageURL': 'images/spotify.png'});
+      }
       index = ARTISTS.findIndex(x => x.name == response.artists.items[0].name);
-      getTracks(response.artists.items[0].id, index);
+      // getTracks(response.artists.items[0].id, index);
       searchRecommendations(response.artists.items[0].id, index, degree);
     }, function (error) {
         console.error('uh oh: ', error);   // 'uh oh: something bad happened’
@@ -25,11 +29,14 @@ function searchArtistById(artistId, index, degree) {
     url: 'https://api.spotify.com/v1/artists/' + artistId,
     }));    
     artistIdPromise.then(function (response) {
-        ARTISTIDS.push(response.id);
-        ARTISTS.push({'name': response.name, 'imports': [], 'artistId': response.id, 'imageURL': response.images[0].url, 'imageHeight': response.images[0].height, 'imageWidth': response.images[0].width});
-        index = ARTISTS.findIndex(x => x.name == response.name);
-        getTracks(response.id, index);
-        searchRecommendations(response.id, index, degree);
+      ARTISTIDS.push(response.id);
+      if (response.images.length > 0) {
+        ARTISTS.push({'name': response.name, 'imports': [], 'artistId': response.id, 'imageURL': response.images[0].url});
+      } else {
+        ARTISTS.push({'name': response.name, 'imports': [], 'artistId': response.id, 'imageURL': 'images/spotify.png'});
+      }
+      index = ARTISTS.findIndex(x => x.name == response.name);
+      searchRecommendations(response.id, index, degree);
     }, function (error) {
         console.error('uh oh: ', error);   // 'uh oh: something bad happened’
     });
@@ -47,7 +54,11 @@ function searchRecommendations(artistId, index, degree) {
         $(response.artists).each(function () {
           ARTISTIDS.push(this.id);
           ARTISTS[index].imports.push(this.name);
-          ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url, 'imageHeight': this.images[0].height, 'imageWidth': this.images[0].width});
+          if (this.images.length > 0) {
+            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
+          } else {
+            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});  
+          }
           searchArtistById(this.id, index, degree+1);
         });
       } else if (degree == 1 && ARTISTIDS.indexOf(this.id) == -1) {
@@ -55,9 +66,14 @@ function searchRecommendations(artistId, index, degree) {
         $(response.artists).each(function () {
           ARTISTIDS.push(this.id);
           ARTISTS[index].imports.push(this.name);
-          ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
+          console.log(this);
+          if (this.images.length > 0) {
+            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
+          } else {
+            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});  
+          }
           index = ARTISTS.findIndex(x => x.artistId == this.id);
-          getTracks(this.id, index);
+          // getTracks(this.id, index);
         });
       } else {
         return;
@@ -65,20 +81,20 @@ function searchRecommendations(artistId, index, degree) {
     }); 
 }
 
-function getTracks(artistId, index) {
-  if(!ARTISTS[index].tracks) {
-    var trackPromise = Promise.resolve($.ajax({
-        url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
-        data: {
-          country: 'US'
-        }}));
-    trackPromise.then(function(response) {
-      ARTISTS[index].tracks = response.tracks;
-    });
-  } else {
-    return;
-  }
-}
+// function getTracks(artistId, index) {
+//   if(!ARTISTS[index].tracks) {
+//     var trackPromise = Promise.resolve($.ajax({
+//         url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
+//         data: {
+//           country: 'US'
+//         }}));
+//     trackPromise.then(function(response) {
+//       ARTISTS[index].tracks = response.tracks;
+//     });
+//   } else {
+//     return;
+//   }
+// }
 
 function renderCircle() {
 var diameter = $(window).height(),
@@ -203,18 +219,30 @@ function packageImports(nodes) {
 }
 
 function click(d) {
-  var tracksHTML = '';
-  var i = 0;
   var index = ARTISTS.findIndex(x => x.artistId == d.artistId);
-  $('.artistImage').css({'background-image': 'url(' + d.imageURL +')'});
-  $('.artistName').html('<h2>' + d.name +'</h2>');
-  $(d.tracks).each(function (){
-    i++;
-    tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '">' + i + '   ' + this.name + '</div>';
-  });
-  $('.tracks').html(tracksHTML);
-  $('.artistInfo').removeClass('hidden');
-  playPreview(d.artistId, index);
+  getTracks(d.artistId, index);
+}
+
+function getTracks(artistId, index) {
+    var trackPromise = Promise.resolve($.ajax({
+        url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
+        data: {
+          country: 'US'
+        }}));
+    trackPromise.then(function(response) {
+      var tracksHTML = '';
+      var i = 0;
+      ARTISTS[index].tracks = response.tracks;
+       $('.artistImage').css({'background-image': 'url(' + ARTISTS[index].imageURL +')'});
+      $('.artistName').html('<h2>' + ARTISTS[index].name +'</h2>');
+      $(ARTISTS[index].tracks).each(function (){
+        i++;
+        tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '">' + i + '   ' + this.name + '</div>';
+      });
+      $('.tracks').html(tracksHTML);
+      $('.artistInfo').removeClass('hidden');
+      playPreview(ARTISTS[index].artistId, index);
+    });
 }
 
 function playPreview(artistId, index) {
