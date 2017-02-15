@@ -64,7 +64,6 @@ function searchRecommendations(artistId, index, degree) {
         $(response.artists).each(function () {
           ARTISTIDS.push(this.id);
           ARTISTS[index].imports.push(this.name);
-          console.log(this);
           if (this.images.length > 0) {
             ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
           } else {
