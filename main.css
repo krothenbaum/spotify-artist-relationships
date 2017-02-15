@@ -61,10 +61,12 @@ body {
 .navbar {
   background-color: rgb(40, 40, 40);
   border-color: rgb(40, 40, 40);
+  line-height: 60px;
 }
 
-input {
-  border-radius: 15px;
+.form-control {
+  margin-left: 8px;
+  border-radius: 16px;
   border: none;
   background-color: #fff;
 }
@@ -83,19 +85,32 @@ form {
 
 .navbar {
   min-height: 80px;
-  /*display: inline-block;*/
 }
 
 .navbar h1 {
   margin: 0;
   padding: 0;
-/*  display: inline-block;
-  vertical-align: middle;*/
   font-size: 24px;
+  line-height: 48px;
 }
 
 .navbar-brand {
   display: inline-flex;
+}
+
+.left-inner-addon {
+  position: relative;
+}
+
+.left-inner-addon input {
+   padding-left: 30px;    
+}
+
+.left-inner-addon i {
+  color: #000;
+  position: absolute;
+  padding: 23px 16px;
+  pointer-events: none;
 }
 
 .fa-spotify {
@@ -123,6 +138,14 @@ form {
   background: #43e57d;
   border: 1px solid #43e57d;
   cursor: pointer;
+  outline: none;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: none;
+    background-color: #1ED760;
+    border: 1px solid #1ed760;
+    color: white: ;
 }
 
 .artistInfo {
@@ -158,18 +181,50 @@ form {
   color: #fff;
 }
 
-.tracksList {
+.trackHeader {
+  color: rgb(200, 200, 200);
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #282828; 
+}
+
+.number {
+  min-width: 16px;
+  display: inline-block;
+}
+
+.song {
+  margin-left: 16px;
+  display: inline-block;
+}
+
+.tracksList {  
   font-size: 14px;
   padding-top: 8px;
   padding-bottom: 8px;
   border-bottom: 1px solid #282828;
 }
 
-.tracksList:first-child {
-  border-top: 1px solid #282828;
+.trackNumber {
+  color: rgb(200, 200, 200);
+  min-width: 16px;
+  display: inline-block;
+}
+
+.trackName {
+  margin-left: 16px;
+  display: inline-block;
 }
 
 .playing {
   background-color: #282828;
   color: #1ED760;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
 }

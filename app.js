@@ -17,7 +17,6 @@ function searchArtistByName(artistName, index, degree) {
         ARTISTS.push({'name': response.artists.items[0].name, 'imports': [], 'artistId': response.artists.items[0].id, 'imageURL': 'images/spotify.png'});
       }
       index = ARTISTS.findIndex(x => x.name == response.artists.items[0].name);
-      // getTracks(response.artists.items[0].id, index);
       searchRecommendations(response.artists.items[0].id, index, degree);
     }, function (error) {
         console.error('uh oh: ', error);   // 'uh oh: something bad happened’
@@ -62,7 +61,6 @@ function searchRecommendations(artistId, index, degree) {
           searchArtistById(this.id, index, degree+1);
         });
       } else if (degree == 1 && ARTISTIDS.indexOf(this.id) == -1) {
-        // return;
         $(response.artists).each(function () {
           ARTISTIDS.push(this.id);
           ARTISTS[index].imports.push(this.name);
@@ -73,28 +71,12 @@ function searchRecommendations(artistId, index, degree) {
             ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});  
           }
           index = ARTISTS.findIndex(x => x.artistId == this.id);
-          // getTracks(this.id, index);
         });
       } else {
         return;
       }
     }); 
 }
-
-// function getTracks(artistId, index) {
-//   if(!ARTISTS[index].tracks) {
-//     var trackPromise = Promise.resolve($.ajax({
-//         url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
-//         data: {
-//           country: 'US'
-//         }}));
-//     trackPromise.then(function(response) {
-//       ARTISTS[index].tracks = response.tracks;
-//     });
-//   } else {
-//     return;
-//   }
-// }
 
 function renderCircle() {
 var diameter = $(window).height(),
@@ -104,7 +86,6 @@ var diameter = $(window).height(),
 var cluster = d3.layout.cluster()
     .size([360, innerRadius])
     .sort(null);
-    // .value(function(d) { return d.size; });
 
 var bundle = d3.layout.bundle();
 
@@ -230,14 +211,15 @@ function getTracks(artistId, index) {
           country: 'US'
         }}));
     trackPromise.then(function(response) {
-      var tracksHTML = '';
+      var tracksHTML = '<div class="trackHeader"><div class="number">#</div><div class="song">Song</div></div>';
       var i = 0;
       ARTISTS[index].tracks = response.tracks;
        $('.artistImage').css({'background-image': 'url(' + ARTISTS[index].imageURL +')'});
       $('.artistName').html('<h2>' + ARTISTS[index].name +'</h2>');
       $(ARTISTS[index].tracks).each(function (){
         i++;
-        tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '">' + i + '   ' + this.name + '</div>';
+        tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '">' +
+        '<div class="trackNumber">' + i + '</div><div class="trackName">' + this.name + '</div></div>';
       });
       $('.tracks').html(tracksHTML);
       $('.artistInfo').removeClass('hidden');
