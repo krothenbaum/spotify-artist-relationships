@@ -5,7 +5,8 @@
 body {
   font-family: "Roboto", sans-serif;
   background-color: rgb(24, 24, 24);
-  padding: 20px;
+  /*padding-top: 80px; */
+  /*padding: 20px;*/
   color: rgb(200, 200, 200);
 }
 
@@ -54,14 +55,14 @@ body {
   stroke: #D90368;
 }
 
-.hidden {
-  display: none;
-}
-
 .navbar {
   background-color: rgb(40, 40, 40);
   border-color: rgb(40, 40, 40);
   line-height: 60px;
+}
+
+.navbar-form {
+  border: none;
 }
 
 .form-control {
@@ -71,8 +72,8 @@ body {
   background-color: #fff;
 }
 
-input:focus { 
-  background-color: white;
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 form {
@@ -80,7 +81,7 @@ form {
 }
 
 .results {
-  margin: 80px auto;  
+  /*margin: 32px auto;*/  
 }
 
 .navbar {
@@ -150,7 +151,7 @@ form {
 
 .artistInfo {
   position: fixed;
-  margin: 80px auto;
+  margin: auto;
   right: 0;
   height: auto;
   color: #fff;
@@ -158,12 +159,12 @@ form {
 }
 
 .artistImage {
-    position: relative;
-    display: inline-block;
-    width: 128px;
-    height: 128px;
-    background-position: center center;
-    background-size: cover;
+  position: relative;
+  display: inline-block;
+  width: 128px;
+  height: 128px;
+  background-position: center center;
+  background-size: cover;
 }
 
 .artistName {
@@ -227,4 +228,65 @@ form {
   text-overflow: ellipsis;
   width: 100%;
   white-space: nowrap;
+}
+
+.description {
+  position: fixed;
+  margin: auto;
+  bottom: 0;
+  right: 0;
+}
+
+.purple {
+  color: #7c25f8;
+}
+
+.pink {
+  color: #D90368;
+}
+
+@media only screen and (max-device-width: 768px) {
+  .navbar-brand h1 {
+    display: none !important;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .navbar {
+    line-height: 24px;
+  }
+  
+  .navbar-toggle {
+    margin-top: 22px;
+  }
+  
+  .navbar-collapse {
+    margin-top: 8px;
+    border: none;
+    box-shadow: none;
+  }
+
+  .navbar-form {
+    margin-top: 16px 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .form-control {
+    display: inline-flex;
+  }
+
+  .left-inner-addon i {
+  color: #000;
+  position: absolute;
+  padding: 10px 16px;
+  pointer-events: none;
+  }
+
+  .btn {
+    margin-left: 8px;
+  }
+
 }

@@ -80,7 +80,7 @@ function searchRecommendations(artistId, index, degree) {
 function renderCircle() {
 var diameter = $(window).height(),
     radius = diameter / 2,
-    innerRadius = radius - 120;
+    innerRadius = radius - 180;
 
 var cluster = d3.layout.cluster()
     .size([360, innerRadius])
@@ -260,6 +260,8 @@ $(document).ready(function() {
 
     setTimeout (function () {
       renderCircle();
+      $('.description').removeClass('hidden');
+      $('.collapse').removeClass('in');
     }, 2000);
   });
 })
