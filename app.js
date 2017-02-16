@@ -80,7 +80,7 @@ function searchRecommendations(artistId, index, degree) {
 function renderCircle() {
 var diameter = $(window).height(),
     radius = diameter / 2,
-    innerRadius = radius - 180;
+    innerRadius = radius - 120;
 
 var cluster = d3.layout.cluster()
     .size([360, innerRadius])
@@ -94,14 +94,15 @@ var line = d3.svg.line.radial()
     .radius(function(d) { return d.y; })
     .angle(function(d) { return d.x / 180 * Math.PI; });
 
+
 var svg = d3.select('.results')
-    .append("svg")
-    .attr("width", '100%')
-    .attr("height", '100%')
-    .attr('viewBox','0 0 '+ diameter +' '+ diameter )
-    .attr('preserveAspectRatio','xMinYMin')
-    .append("g")
-    .attr("transform", "translate(" + radius + "," + radius + ")");
+      .append("svg")
+      .attr("width", '100%')
+      .attr("height", '100%')
+      .attr('viewBox','0 0 '+ diameter +' '+ diameter )
+      .attr('preserveAspectRatio','xMinYMin')
+      .append("g")
+      .attr("transform", "translate(" + radius + "," + radius + ")");
 
 var link = svg.append("g").selectAll(".link"),
     node = svg.append("g").selectAll(".node");
@@ -217,7 +218,7 @@ function getTracks(artistId, index) {
       $('.artistName').html('<h2>' + ARTISTS[index].name +'</h2>');
       $(ARTISTS[index].tracks).each(function (){
         i++;
-        tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '">' +
+        tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="' + this.preview_url + '">' +
         '<div class="trackNumber">' + i + '</div><div class="trackName">' + this.name + '</div></div>';
       });
       $('.tracks').html(tracksHTML);
@@ -264,4 +265,17 @@ $(document).ready(function() {
       $('.collapse').removeClass('in');
     }, 2000);
   });
+
+  $('.tracks').click(function(e) { 
+    console.log($(e.target).closest('.tracksList').attr('src'))
+     if(AUDIOOBJ){
+      AUDIOOBJ.pause();
+    }
+    AUDIOOBJ.setAttribute('src', $(e.target).closest('.tracksList').attr('src'));
+    $('.tracksList').removeClass('playing');
+    $('#' + $(e.target).closest('.tracksList').attr('id')).addClass('playing');
+    AUDIOOBJ.volume = 0.1;
+    AUDIOOBJ.load();
+    AUDIOOBJ.play(); 
+  })
 })

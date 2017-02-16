@@ -80,10 +80,6 @@ form {
   display: inline-block;
 }
 
-.results {
-  /*margin: 32px auto;*/  
-}
-
 .navbar {
   min-height: 80px;
 }
@@ -246,8 +242,13 @@ form {
 }
 
 @media only screen and (max-device-width: 768px) {
+
+  .node {
+    font: 300 6px "Helvetica Neue", "Roboto", Arial, sans-serif;
+  }
+
   .navbar-brand h1 {
-    display: none !important;
+    font-size: 14px;
   }
 
   .description {
@@ -288,5 +289,4 @@ form {
   .btn {
     margin-left: 8px;
   }
-
 }
