@@ -5,13 +5,11 @@
 body {
   font-family: "Roboto", sans-serif;
   background-color: rgb(24, 24, 24);
-  /*padding-top: 80px; */
-  /*padding: 20px;*/
   color: rgb(200, 200, 200);
 }
 
 .node {
-  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 300 9px "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #aaa;
 }
 
