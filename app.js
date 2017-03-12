@@ -219,11 +219,11 @@ function getTracks(artistId, index) {
       $(ARTISTS[index].tracks).each(function (){
         i++;
         tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="' + this.preview_url + '">' +
-        '<div class="trackNumber">' + i + '</div><div class="trackName">' + this.name + '</div></div>';
+        '<div class="trackNumber">' + i +'<i class="fa fa-play" aria-hidden="true"></i>' + '</div><div class="trackName">' + this.name + '</div></div>';
       });
       $('.tracks').html(tracksHTML);
       $('.artistInfo').removeClass('hidden');
-      playPreview(ARTISTS[index].artistId, index);
+      // playPreview(ARTISTS[index].artistId, index);
     });
 }
 
@@ -237,7 +237,6 @@ function playPreview(artistId, index) {
   $('#' + ARTISTS[index].tracks[trackNumber].id).addClass('playing');
   AUDIOOBJ.volume = 0.1;
   AUDIOOBJ.load();
-  AUDIOOBJ.play();
 }
 }
 
@@ -267,15 +266,20 @@ $(document).ready(function() {
   });
 
   $('.tracks').click(function(e) { 
-    console.log($(e.target).closest('.tracksList').attr('src'))
      if(AUDIOOBJ){
       AUDIOOBJ.pause();
     }
     AUDIOOBJ.setAttribute('src', $(e.target).closest('.tracksList').attr('src'));
+    if($('#' + $(e.target).closest('.tracksList').attr('id')).hasClass('playing')) {
+      AUDIOOBJ.pause();
+    } else {
+      AUDIOOBJ.volume = 0.1;
+      AUDIOOBJ.load();
+      AUDIOOBJ.play();
+    }
+    $('.playing .fa').toggleClass('fa-play fa-pause');
     $('.tracksList').removeClass('playing');
     $('#' + $(e.target).closest('.tracksList').attr('id')).addClass('playing');
-    AUDIOOBJ.volume = 0.1;
-    AUDIOOBJ.load();
-    AUDIOOBJ.play(); 
+    $('.playing .fa').toggleClass('fa-play fa-pause');
   })
 })
