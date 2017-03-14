@@ -52,7 +52,7 @@ body {
 }
 
 .node {
-  font: 300 9px "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 300 16px "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #aaa;
 }
 
@@ -296,6 +296,10 @@ form {
 @media (min-width: 768px) {
   .sm12 {
     width: 100%;
+  }
+
+  .results {
+    text-align: center;
   }
 }
 

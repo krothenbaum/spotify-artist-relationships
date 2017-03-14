@@ -60,17 +60,17 @@ function searchRecommendations(artistId, index, degree) {
           }
           searchArtistById(this.id, index, degree+1);
         });
-      } else if (degree == 1 && ARTISTIDS.indexOf(this.id) == -1) {
-        $(response.artists).each(function () {
-          ARTISTIDS.push(this.id);
-          ARTISTS[index].imports.push(this.name);
-          if (this.images.length > 0) {
-            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
-          } else {
-            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});  
-          }
-          index = ARTISTS.findIndex(x => x.artistId == this.id);
-        });
+      // } else if (degree == 1 && ARTISTIDS.indexOf(this.id) == -1) {
+      //   $(response.artists).each(function () {
+      //     ARTISTIDS.push(this.id);
+      //     ARTISTS[index].imports.push(this.name);
+      //     if (this.images.length > 0) {
+      //       ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
+      //     } else {
+      //       ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});  
+      //     }
+      //     index = ARTISTS.findIndex(x => x.artistId == this.id);
+      //   });
       } else {
         return;
       }
@@ -79,7 +79,7 @@ function searchRecommendations(artistId, index, degree) {
 
 function renderCircle() {
 var diameter = $(window).height(),
-    radius = diameter / 2,
+    radius = diameter / 4,
     innerRadius = radius - 120;
 
 var cluster = d3.layout.cluster()
@@ -253,10 +253,10 @@ $(document).ready(function() {
         degree = 0;
     
     searchArtistByName($(this).find('#artist-1-query').val(), index, degree);
-    var artist2 = $(this).find('#artist-2-query').val();
-    setTimeout (function () {
-      searchArtistByName(artist2, index, degree);
-    }, 1000);
+    // var artist2 = $(this).find('#artist-2-query').val();
+    // setTimeout (function () {
+    //   searchArtistByName(artist2, index, degree);
+    // }, 1000);  
 
     setTimeout (function () {
       renderCircle();
