@@ -9,6 +9,48 @@ body {
   color: rgb(200, 200, 200);
 }
 
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.row::before,
+.row::after {
+  display: table;
+  content: '';
+}
+
+.row::after {
+  clear: both;
+}
+
+.col {
+  float: left;
+
+  /* Gutters:
+   * Each column is padded by half-a-gutter on each side,
+   *
+   * Half a gutter is 10px, 10/960 (context) = 1.041666%
+   *
+   */
+  padding-left: 1.04166666%;
+  padding-right: 1.04166666%;
+}
+.pull-right {
+  float: right !important;
+}
+
+.xs-12 {
+  width: 100%;
+}
+
 .node {
   font: 300 9px "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #aaa;
@@ -192,7 +234,7 @@ form {
 }
 
 .song {
-  margin-left: 16px;
+  margin-left: 32px;
   display: inline-block;
 }
 
@@ -207,10 +249,16 @@ form {
   color: rgb(200, 200, 200);
   min-width: 16px;
   display: inline-block;
+  position: absolute;
+}
+
+.fa {
+  position: relative;
+  left: 0;
 }
 
 .trackName {
-  margin-left: 16px;
+  margin-left: 32px;
   display: inline-block;
 }
 
@@ -245,8 +293,29 @@ form {
   color: #D90368;
 }
 
-@media only screen and (max-device-width: 768px) {
+@media (min-width: 768px) {
+  .sm12 {
+    width: 100%;
+  }
+}
 
+@media (min-width: 992px) {
+  .md8 {
+    width: 66.66666667%;
+  }
+
+  .md6 {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .lg3 {
+    width: 25%;
+  }
+}
+
+@media only screen and (max-device-width: 768px) {
   .node {
     font: 300 6px "Helvetica Neue", "Roboto", Arial, sans-serif;
   }
@@ -295,3 +364,13 @@ form {
   }
 }
 
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .hidden-sm {
+    display: none !important;
+}
