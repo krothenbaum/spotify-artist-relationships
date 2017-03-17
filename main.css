@@ -51,7 +51,7 @@ body {
   width: 100%;
 }
 
-.node {
+/*.node {
   font: 300 16px "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #aaa;
 }
@@ -94,23 +94,71 @@ body {
 
 .link--target {
   stroke: #D90368;
+}*/
+
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 80px;
+  background-color: rgb(40, 40, 40);
+  border-color: rgb(40, 40, 40);
 }
 
-.navbar {
+.center-text-trick {
+  height: 80px;
+  line-height: 80px;
+  white-space: nowrap;
+}
+
+.inline-form {
+  position: relative;
+  display: inline-block;
+}
+
+/*.navbar {
   background-color: rgb(40, 40, 40);
   border-color: rgb(40, 40, 40);
   line-height: 60px;
-}
+}*/
 
 .navbar-form {
   border: none;
 }
 
+
 .form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
   margin-left: 8px;
   border-radius: 16px;
-  border: none;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
   background-color: #fff;
+  background-image: none;
+  border: none;
+  border-radius: 4px;
+/*  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;*/
+}
+
+.navbar-form {
+  padding: 10px 15px;
+  margin-top: 8px;
+  margin-right: -15px;
+  margin-bottom: 8px;
+  margin-left: -15px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  display: inline-block;
 }
 
 input:-webkit-autofill {
@@ -121,20 +169,34 @@ form {
   display: inline-block;
 }
 
-.navbar {
-  min-height: 80px;
-}
-
-.navbar h1 {
+.navbar-fixed h1 {
   margin: 0;
   padding: 0;
   font-size: 24px;
   line-height: 48px;
   font-weight: 500;
+  display: inline-block;
 }
 
 .navbar-brand {
   display: inline-flex;
+}
+
+input {
+  border: none;
+  line-height: 32px;
+  border-radius: 16px;
+}
+
+.form-input {
+  padding-left: 24px;
+}
+
+form i {
+  color: #000;
+  margin-top: 32px;
+  position: absolute;
+  padding-left: 8px;
 }
 
 .left-inner-addon {
@@ -153,26 +215,27 @@ form {
 }
 
 .fa-spotify {
+  float: left;
   color: #1ED760;
+  padding-top: 16px;
   padding-left: 8px;
   padding-right: 8px;
 }
 
-.btn {
-  margin-left: 16px;
-  color: #fff;
-  background-color: #1ED760;
-  border: 1px solid #1ed760;
-  border-radius: 20px;
-  height: 27px;
-  align-items: center; 
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 11px;
-  outline: none;
+.button {
+    margin-left: 16px;
+    color: #fff;
+    background-color: #1ED760;
+    border: 1px solid #1ed760;
+    border-radius: 20px;
+    line-height: 0;
+    padding: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
 }
 
-.btn:hover {
+.button:hover {
   color: #fff;
   background: #43e57d;
   border: 1px solid #43e57d;
@@ -180,7 +243,7 @@ form {
   outline: none;
 }
 
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+.button.active.focus, .button.active:focus, .button.focus, .button:active.focus, .button:active:focus, .btn:focus {
     outline: none;
     background-color: #1ED760;
     border: 1px solid #1ed760;
@@ -252,7 +315,7 @@ form {
   position: absolute;
 }
 
-.fa {
+.play {
   position: relative;
   left: 0;
 }
@@ -291,6 +354,36 @@ form {
 
 .pink {
   color: #D90368;
+}
+
+@media (max-width: 850px) {
+  .center-text-trick {
+    height: 160px;
+    line-height: 80px;
+    white-space: nowrap;
+  }
+  
+  .pull-right {
+    /*float: left !important;*/
+  }
+
+  .inline-form {
+    display: flex;
+    padding-bottom: 4px;
+    float: left !important;
+  }
+
+  form i {
+      margin-top: 8px;
+  }
+
+  .button {
+    margin-top: 2px;
+    margin-left: 2px;
+      display: flex;
+      margin: 0;
+  }
+
 }
 
 @media (min-width: 768px) {
