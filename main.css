@@ -446,7 +446,7 @@ form i {
     font: 300 6px "Helvetica Neue", "Roboto", Arial, sans-serif;
   }
 */
-  .navbar-brand h1 {
+  .navbar-fixed h1 {
     font-size: 14px;
   }
 

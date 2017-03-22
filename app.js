@@ -145,13 +145,14 @@ $(document).ready(function() {
       AUDIOOBJ.pause();
     }
 
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       $('.tracksList').on('click touch', function(e){
         $('iframe').remove(); //Remove all previous iframes. 
 
         var i = document.createElement('iframe');
         i.src =  $(this).attr('src');
         $(this).append(i);
+        console.log(this);
       });
     } else {
       AUDIOOBJ.setAttribute('src', $(e.target).closest('.tracksList').attr('src'));

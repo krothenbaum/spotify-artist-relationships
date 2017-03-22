@@ -9,6 +9,8 @@ body {
   color: rgb(200, 200, 200);
 }
 
+iframe{ width:50px; height:50px; display:block; }
+
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;
@@ -295,6 +297,10 @@ form i {
 }
 
 @media (max-width: 767px) {
+  .navbar-fixed h1 {
+    font-size: 14px;
+  }
+
   .center-text-trick {
     height: 160px;
     line-height: 80px;
