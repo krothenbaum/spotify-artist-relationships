@@ -33,16 +33,10 @@ body {
 
 .col {
   float: left;
-
-  /* Gutters:
-   * Each column is padded by half-a-gutter on each side,
-   *
-   * Half a gutter is 10px, 10/960 (context) = 1.041666%
-   *
-   */
   padding-left: 1.04166666%;
   padding-right: 1.04166666%;
 }
+
 .pull-right {
   float: right !important;
 }
@@ -173,6 +167,7 @@ form {
   margin: 0;
   padding: 0;
   font-size: 24px;
+  padding-right: 48px;
   line-height: 48px;
   font-weight: 500;
   display: inline-block;
@@ -250,9 +245,26 @@ form i {
     color: white: ;
 }
 
+.results {
+  padding-left: 16px;
+  padding-top: 16px;
+  margin-top: 160px;
+}
+
+.selected {
+  color: #7c25f8;
+  font-weight: 800;
+}
+
+.name {
+  cursor: pointer;
+}
+
 .artistInfo {
   position: fixed;
-  margin: auto;
+  margin-top: 160px;
+  margin-left: auto;
+  margin-right: auto;
   right: 0;
   height: auto;
   color: #fff;
@@ -356,12 +368,16 @@ form i {
   color: #D90368;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 710px) {
   .center-text-trick {
     height: 160px;
     line-height: 80px;
     white-space: nowrap;
   }
+
+  .form-input {
+    margin-right: 8px;
+  } 
   
   .pull-right {
     /*float: left !important;*/
@@ -380,15 +396,28 @@ form i {
   .button {
     margin-top: 2px;
     margin-left: 2px;
-      display: flex;
-      margin: 0;
+    display: flex;
+    margin: 0;
+    margin-top: 4px;
   }
-
+  
+  .artistImage {
+    position: relative;
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    background-position: center center;
+    background-size: cover;
+  }
 }
 
 @media (min-width: 768px) {
   .sm12 {
     width: 100%;
+  }
+
+  .sm8 {
+    width: 66.66666667%;
   }
 
   .results {
@@ -403,7 +432,7 @@ form i {
 
   .md6 {
     width: 50%;
-  }
+  } 
 }
 
 @media (min-width: 1200px) {
@@ -413,10 +442,10 @@ form i {
 }
 
 @media only screen and (max-device-width: 768px) {
-  .node {
+/*  .node {
     font: 300 6px "Helvetica Neue", "Roboto", Arial, sans-serif;
   }
-
+*/
   .navbar-brand h1 {
     font-size: 14px;
   }
@@ -459,15 +488,22 @@ form i {
   .btn {
     margin-left: 8px;
   }
-}
 
-@media (max-width: 767px) {
-  .hidden-xs {
-    display: none !important;
+  .trackList {
+    font-size: 8px;
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .hidden-sm {
+@media (max-width: 767px) {
+/*  .hidden-xs {
     display: none !important;
+  }*/
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+/*  .hidden-sm {
+    display: none !important;
+  }*/
+
+
 }

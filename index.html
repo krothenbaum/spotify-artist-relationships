@@ -2,69 +2,37 @@
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="utf-8" name="description" content="Spotify Artist Relationships">
+	<meta charset="utf-8" name="description" content="Spotify Artist Recommendations">
 	<title>Spotify Artist Relationships</title>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
 	<!-- <link rel="stylesheet" href="bootstrap.css"> -->
-	<!-- <link rel="stylesheet" href="style.css"> -->
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link rel="stylesheet" href="main.css">
+	<!-- <link rel="stylesheet" href="main.css"> -->
+	<link rel="stylesheet" href="style.css">
 
 </head>
 <body>
-<!-- 	<nav class="navbar-fixed">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
-				  <span class="sr-only">Toggle navigation</span>
-        	<span class="icon-bar"></span>
-        	<span class="icon-bar"></span>
-        	<span class="icon-bar"></span>
-      	</button>
-				<div class="navbar-brand">
-					<i class="fa fa-spotify fa-3x hidden-md-down" aria-hidden="true"></i>
-					<h1>Spotify Artist Relationships</h1>
-				</div>
-			</div>	
-			<div class="collapse navbar-collapse in" id="navbar-search"> 	
-				<form class="navbar-form pull-right" role="search" name="artist-form">
-					<div class="form-group left-inner-addon">
-						<i class="fa fa-search" aria-hidden="true"></i>
-						<input type="text" id="artist-1-query" value="" class="form-control" placeholder="First Artist"/>
-					</div>
-					<div class="form-group left-inner-addon">
-						<i class="fa fa-search" aria-hidden="true"></i>
-						<input type="text" id="artist-2-query" value="" class="form-control" placeholder="Second Artist"/>
-					</div>
-					<input type="submit" class="btn btn-default"></input>
-				</form>
-			</div>
-		</div>
-	</nav> -->
 	<nav class="navbar-fixed center-text-trick">
 		<div class="container-fluid">
 			<i class="fa fa-spotify fa-3x" aria-hidden="true"></i>
-			<h1>Spotify Artist Relationships</h1>
-			<form role="search" name="artist-form" class="pull-right">
+			<h1>Spotify Artist Recommendations</h1>
+			<form role="search" name="artist-form" class="pull-right navbar-form">
 					<div class="inline-form">
 						<i class="fa fa-search" aria-hidden="true"></i>
 						<input type="text" id="artist-1-query" value="" class="form-input" placeholder="First Artist"/>
+						<input type="submit" class="button"></input>
 					</div>
-					<div class="inline-form">
-						<i class="fa fa-search" aria-hidden="true"></i>
-						<input type="text" id="artist-2-query" value="" class="form-input" placeholder="Second Artist"/>
-					</div>
-					<input type="submit" class="button"></input>
-				</form>
+			</form>
 		</div>
 	</nav>
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="results col md8 sm12"></div>
-			<div class="artistInfo hidden lg3 hidden-sm hidden-xs pull-right">
+			<div class="results col-6"></div>
+			<div class="artistInfo hidden col-6 pull-right">
 				<div class="row">
 					<div class="artistImage"></div>
 					<div class="artistName"></div>

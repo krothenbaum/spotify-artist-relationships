@@ -82,137 +82,6 @@ function searchRecommendations(artistId, degree) {
     }); 
 }
 
-// function renderCircle() {
-// var diameter = $(window).height(),
-//     radius = diameter / 4,
-//     innerRadius = radius - 120;
-
-// var cluster = d3.layout.cluster()
-//     .size([360, innerRadius])
-//     .sort(null);
-
-// var bundle = d3.layout.bundle();
-
-// var line = d3.svg.line.radial()
-//     .interpolate("bundle")
-//     .tension(.85)
-//     .radius(function(d) { return d.y; })
-//     .angle(function(d) { return d.x / 180 * Math.PI; });
-
-
-// var svg = d3.select('.results')
-//       .append("svg")
-//       .attr("width", '100%')
-//       .attr("height", '100%')
-//       .attr('viewBox','0 0 '+ diameter +' '+ diameter )
-//       .attr('preserveAspectRatio','xMinYMin')
-//       .append("g")
-//       .attr("transform", "translate(" + radius + "," + radius + ")");
-
-// var link = svg.append("g").selectAll(".link"),
-//     node = svg.append("g").selectAll(".node");
-
-//   var nodes = cluster.nodes(packageHierarchy(ARTISTS)),
-//       links = packageImports(nodes);
-
-//   link = link
-//       .data(bundle(links))
-//     .enter().append("path")
-//       .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
-//       .attr("class", "link")
-//       .attr("d", line);
-
-//   node = node
-//       .data(nodes.filter(function(n) { return !n.children; }))
-//     .enter().append("text")
-//       .attr("class", "node")
-//       .attr("dy", ".31em")
-//       .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
-//       .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-//       .text(function(d) { return d.key; })
-//       .on("mouseover", mouseovered)
-//       .on("mouseout", mouseouted)
-//       .on("click", click);
-
-// function mouseovered(d) {
-//   node
-//       .each(function(n) { n.target = n.source = false; });
-
-//   link
-//       .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
-//       .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
-//     .filter(function(l) { return l.target === d || l.source === d; })
-//       .each(function() { this.parentNode.appendChild(this); });
-
-//   node
-//       .classed("node--target", function(n) { return n.target; })
-//       .classed("node--source", function(n) { return n.source; });
-// }
-
-// function mouseouted(d) {
-//   link
-//       .classed("link--target", false)
-//       .classed("link--source", false);
-
-//   node
-//       .classed("node--target", false)
-//       .classed("node--source", false);
-// }
-
-// d3.select(self.frameElement).style("height", diameter + "px");
-
-// // Lazily construct the package hierarchy from class names.
-// function packageHierarchy(classes) {
-//   var map = {};
-
-//   function find(name, data) {
-//     var node = map[name], i;
-//     if (!node) {
-//       node = map[name] = data || {name: name, children: []};
-//       if (name.length) {
-//         node.parent = find(name.substring(0, i = name.lastIndexOf("|")));
-//         node.parent.children.push(node);
-//         node.key = name.substring(i + 1);
-//       }
-//     }
-//     return node;
-//   }
-  
-//   classes.forEach(function(d) {    
-//     find(d.name, d);
-//   });
-  
-//   return map[""];
-// }
-
-// // Return a list of imports for the given array of nodes.
-// function packageImports(nodes) {
-//   var map = {},
-//       imports = [];
-
-//   // Compute a map from name to node.
-//   nodes.forEach(function(d) {
-//     map[d.name] = d;
-//   });
-
-//   // For each import, construct a link from the source to target node.
-//   nodes.forEach(function(d) {
-//     if (d.imports) d.imports.forEach(function(i) {
-//       imports.push({source: map[d.name], target: map[i]});
-//     });
-//   });
-//   return imports;
-// }
-
-// function click(d) {
-//   var index = ARTISTS.findIndex(x => x.artistId == d.artistId);
-//   getTracks(d.artistId, index);
-// }
-
-
-// }
-
-
 //Search for top tracks for artist by id and display for user
 function getTracks(artistId) {
  var trackPromise = Promise.resolve($.ajax({
@@ -221,41 +90,31 @@ function getTracks(artistId) {
     country: 'US'
   }}));
  trackPromise.then(function(response) {
-  var tracksHTML = '<div class="trackHeader"><div class="number">#</div><div class="song">Song</div></div>';
-  var i = 0;
-  var index = ARTISTS.findIndex(x => x.artistId == artistId);
-  ARTISTS[index].tracks = response.tracks;
-  $('.artistImage').css({'background-image': 'url(' + ARTISTS[index].imageURL +')'});
-  $('.artistName').html('<h2>' + ARTISTS[index].name +'</h2>');
-  $(ARTISTS[index].tracks).each(function (){
-    i++;
-    tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="' + this.preview_url + '">' +
-    '<div class="trackNumber">' + i +'<i class="fa fa-play play" aria-hidden="true"></i>' + '</div><div class="trackName">' + this.name + '</div></div>';
-  });
-  $('.tracks').html(tracksHTML);
-  $('.artistInfo').removeClass('hidden');
-      // playPreview(ARTISTS[index].artistId, index);
+    var tracksHTML = '<div class="trackHeader"><div class="number">#</div><div class="song">Song</div></div>';
+    var i = 0;
+    var index = ARTISTS.findIndex(x => x.artistId == artistId);
+    ARTISTS[index].tracks = response.tracks;
+    $('.artistImage').css({'background-image': 'url(' + ARTISTS[index].imageURL +')'});
+    $('.artistName').html('<h2>' + ARTISTS[index].name +'</h2>');
+    $(ARTISTS[index].tracks).each(function (){
+      i++;
+      tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="' + this.preview_url + '">' +
+      '<div class="trackNumber">' + i +'</div><i class="fa fa-play play" aria-hidden="true"></i>' + '<div class="trackName">' + this.name + '</div></div>';
+    });
+    $('.tracks').html(tracksHTML);
+    $('.artistInfo').removeClass('hidden');
   });
 }
-
-// function playPreview(artistId, index) {
-//   if(AUDIOOBJ){
-//     AUDIOOBJ.pause();
-//   }
-
-//   var trackNumber = Math.floor(Math.random() * ARTISTS[index].tracks.length);
-//   AUDIOOBJ.setAttribute('src', ARTISTS[index].tracks[trackNumber].preview_url);
-//   $('#' + ARTISTS[index].tracks[trackNumber].id).addClass('playing');
-//   AUDIOOBJ.volume = 0.1;
-//   AUDIOOBJ.load();
-// }
-
 
 function printArtistName(ARTISTS) {
   for (var i = 0; i < ARTISTS.length; i++) {
     $('.results').append('<div class="name" attr="'+ ARTISTS[i].artistId +'">' + ARTISTS[i].name + '</div>');
   }
+
   $('.name').click(function(e) {
+    AUDIOOBJ.pause();
+    $('.name').removeClass('selected');
+    $(this).addClass('selected');
     getTracks($(this).attr('attr'));
   });
 }
@@ -273,40 +132,40 @@ $(document).ready(function() {
         degree = 0;
     
     searchArtistByName($(this).find('#artist-1-query').val(), degree);
-    // var artist2 = $(this).find('#artist-2-query').val();
-    // setTimeout (function () {
-    //   searchArtistByName(artist2, index, degree);
-    // }, 1000);  
 
     setTimeout (function () {
-      // renderCircle();
-      // $('.description').removeClass('hidden');
-      // $('.collapse').removeClass('in');
       console.log(ARTISTS);
       printArtistName(ARTISTS);
-
-
-    }, 2000);
+    }, 1000);
   });
 
   //Play or pause the track user clicks on
   $('.tracks').click(function(e) { 
-     if(AUDIOOBJ){
+    if(AUDIOOBJ){
       AUDIOOBJ.pause();
     }
-    AUDIOOBJ.setAttribute('src', $(e.target).closest('.tracksList').attr('src'));
-    if($('#' + $(e.target).closest('.tracksList').attr('id')).hasClass('playing')) {
-      AUDIOOBJ.pause();
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      $('.tracksList').on('click touch', function(e){
+        $('iframe').remove(); //Remove all previous iframes. 
+
+        var i = document.createElement('iframe');
+        i.src =  $(this).attr('src');
+        $(this).append(i);
+      });
     } else {
-      AUDIOOBJ.volume = 0.1;
-      AUDIOOBJ.load();
-      AUDIOOBJ.play();
+      AUDIOOBJ.setAttribute('src', $(e.target).closest('.tracksList').attr('src'));
+      if($('#' + $(e.target).closest('.tracksList').attr('id')).hasClass('playing')) {
+        AUDIOOBJ.pause();
+      } else {
+        AUDIOOBJ.volume = 0.1;
+        AUDIOOBJ.load();
+        AUDIOOBJ.play();
+      }
+      $('.playing .fa').toggleClass('fa-play fa-pause');
+      $('.tracksList').removeClass('playing');
+      $('#' + $(e.target).closest('.tracksList').attr('id')).addClass('playing');
+      $('.playing .fa').toggleClass('fa-play fa-pause');
     }
-    $('.playing .fa').toggleClass('fa-play fa-pause');
-    $('.tracksList').removeClass('playing');
-    $('#' + $(e.target).closest('.tracksList').attr('id')).addClass('playing');
-    $('.playing .fa').toggleClass('fa-play fa-pause');
   });
-
-
 })
