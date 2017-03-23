@@ -25,6 +25,7 @@ function searchArtistByName(artistName, degree) {
     });
 }
 
+//Search artists by Spotify Id and then search the related artists for each artist
 function searchArtistById(artistId, degree) {
   var artistIdPromise = Promise.resolve($.ajax({
     url: 'https://api.spotify.com/v1/artists/' + artistId,
@@ -136,7 +137,7 @@ $(document).ready(function() {
     setTimeout (function () {
       console.log(ARTISTS);
       printArtistName(ARTISTS);
-    }, 1000);
+    }, 2000);
   });
 
   //Play or pause the track user clicks on

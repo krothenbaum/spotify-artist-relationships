@@ -69,29 +69,15 @@ iframe{ width:50px; height:50px; display:block; }
   width: 8.33333333%;
 }
 
-.pull-right {
-  float: right !important;
-}
-
-.navbar-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100%;
-  height: 80px;
-  background-color: rgb(40, 40, 40);
-  border-color: rgb(40, 40, 40);
-}
-
 .center-text-trick {
-  height: 80px;
-  line-height: 80px;
+  height: 64px;
+  line-height: 64px;
   white-space: nowrap;
 }
 
 .inline-form {
   position: relative;
+  margin-left: 16px;
   display: inline-block;
 }
 
@@ -101,12 +87,11 @@ form {
 
 .navbar-fixed h1 {
   margin: 0;
+  margin-top: 12px;
   padding: 0;
   font-size: 24px;
-  padding-right: 116px;
   line-height: 48px;
   font-weight: 500;
-  display: inline-block;
 }
 
 input {
@@ -121,7 +106,7 @@ input {
 
 form i {
   color: #000;
-  margin-top: 32px;
+  margin-top: 24px;
   position: absolute;
   padding-left: 8px;
 }
@@ -163,9 +148,10 @@ form i {
 }
 
 .results {
+  text-align: left;
   padding-left: 16px;
   padding-top: 16px;
-  margin-top: 160px;
+  margin-top: 80px;
 }
 
 .selected {
@@ -178,8 +164,9 @@ form i {
 }
 
 .artistInfo {
+  transform-origin: top;
   position: fixed;
-  margin-top: 160px;
+  margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
   right: 0;
@@ -202,6 +189,7 @@ form i {
   position: absolute;
   top: 0;
   margin: 0;
+  margin-top: 16px;
   width: 256px;
   margin-left: 16px;
   display: inline-block;
@@ -240,8 +228,6 @@ form i {
 
 .trackNumber {
   color: rgb(200, 200, 200);
-/*  min-width: 16px;
-  display: inline-block;*/
   position: absolute;
 }
 
@@ -271,8 +257,12 @@ form i {
   white-space: nowrap;
 }
 
+.hidden {
+  display: none;
+}
 
-@media only screen and (min-width: 640px) {
+
+@media (min-width: 640px){
   .col-3 {
     width: 25%;
   }
@@ -291,17 +281,69 @@ form i {
 }
 
 @media (min-width: 768px) {
+  h1 {
+    font-size: 37px;
+  }
+
   .results {
-    text-align: center;
+    font-size: 24px;
+  }  
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .results {
+    font-size: 32px;
+  }
+
+   .artistInfo {
+    transform: scale(1.3);
+  }
+}
+
+@media (min-width: 1200px) {
+  .results {
+    font-size: 36px;
+  }
+
+  .artistInfo {
+    transform: scale(1.5);
   }
 }
 
 @media (max-width: 767px) {
+
   .navbar-fixed h1 {
-    font-size: 14px;
+    font-size: 18px;
+  }
+  
+  .artistImage {
+    width: 64px;
+    height: 64px;
+    margin-right: 256px;
   }
 
-  .center-text-trick {
+  .artistName {
+    position: initial;
+    margin-left: 0;
+    margin-top: 0;
+    width: initial;
+  }
+
+  .artistName h2 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .tracksList {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+/*  .navbar-fixed h1 {
+    font-size: 14px;
+  }*/
+
+  /*.center-text-trick {
     height: 160px;
     line-height: 80px;
     white-space: nowrap;
@@ -317,8 +359,8 @@ form i {
 
   .inline-form {
     display: inline-flex;
-    /*padding-bottom: 4px;*/
-    /*float: left !important;*/
+    padding-bottom: 4px;
+    float: left !important;
   }
 
   form i {
@@ -331,29 +373,5 @@ form i {
     display: flex;
     margin: 0;
     margin-top: 4px;
-  }
-  
-  .artistImage {
-    position: relative;
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    background-position: center center;
-    background-size: cover;
-  }
-
-  .artistName {
-    position: initial;
-    margin-left: 0;
-  }
-
-  .artistName h2 {
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-
-  .tracksList {
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
+  }*/
 }
