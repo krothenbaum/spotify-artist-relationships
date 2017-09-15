@@ -1,14 +1,18 @@
 var ARTISTS = [];
 var ARTISTIDS = [];
 var AUDIOOBJ = new Audio();
+var TOKEN;
 
 function searchArtistByName(artistName, index, degree) {
   var artistPromise = Promise.resolve($.ajax({
     url: 'https://api.spotify.com/v1/search',
+    headers: {
+      'Authorization': 'Bearer ' + TOKEN
+    },
     data: {
       q: artistName,
       type: 'artist'
-    }}));    
+    }}));
     artistPromise.then(function (response) {
       ARTISTIDS.push(response.artists.items[0].id);
       if (response.artists.items[0].images.length > 0) {
@@ -26,7 +30,10 @@ function searchArtistByName(artistName, index, degree) {
 function searchArtistById(artistId, index, degree) {
   var artistIdPromise = Promise.resolve($.ajax({
     url: 'https://api.spotify.com/v1/artists/' + artistId,
-    }));    
+    headers: {
+      'Authorization': 'Bearer ' + TOKEN
+    },
+    }));
     artistIdPromise.then(function (response) {
       ARTISTIDS.push(response.id);
       if (response.images.length > 0) {
@@ -44,10 +51,13 @@ function searchArtistById(artistId, index, degree) {
 function searchRecommendations(artistId, index, degree) {
   var recommendationsPromise = Promise.resolve($.ajax({
     url: 'https://api.spotify.com/v1/artists/' + artistId + '/related-artists',
+    headers: {
+      'Authorization': 'Bearer ' + TOKEN
+    },
     data: {
       type: 'artist',
     }}));
-    
+
     recommendationsPromise.then(function (response) {
       if (degree < 1  && ARTISTIDS.indexOf(this.id) == -1) {
         $(response.artists).each(function () {
@@ -56,7 +66,7 @@ function searchRecommendations(artistId, index, degree) {
           if (this.images.length > 0) {
             ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
           } else {
-            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});  
+            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});
           }
           searchArtistById(this.id, index, degree+1);
         });
@@ -67,14 +77,14 @@ function searchRecommendations(artistId, index, degree) {
           if (this.images.length > 0) {
             ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': this.images[0].url});
           } else {
-            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});  
+            ARTISTS.push({'name': this.name, 'imports': [], 'artistId': this.id, 'imageURL': 'images/spotify.png'});
           }
           index = ARTISTS.findIndex(x => x.artistId == this.id);
         });
       } else {
         return;
       }
-    }); 
+    });
 }
 
 function renderCircle() {
@@ -172,11 +182,11 @@ function packageHierarchy(classes) {
     }
     return node;
   }
-  
-  classes.forEach(function(d) {    
+
+  classes.forEach(function(d) {
     find(d.name, d);
   });
-  
+
   return map[""];
 }
 
@@ -207,6 +217,9 @@ function click(d) {
 function getTracks(artistId, index) {
     var trackPromise = Promise.resolve($.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
+        headers: {
+          'Authorization': 'Bearer ' + TOKEN
+        },
         data: {
           country: 'US'
         }}));
@@ -240,7 +253,25 @@ function playPreview(artistId, index) {
 }
 }
 
+async function authorizeSpotify() {
+  let tokenPromise;
+  try {
+    tokenPromise = await $.ajax({
+      type: 'GET',
+      url: 'https://spotify-authentication-server.herokuapp.com/auth',
+      crossDomain: true
+    });
+    return tokenPromise.token;
+  } catch(e) {
+    console.log('ERROR: ' + JSON.stringify(e));
+  }
+}
+
 $(document).ready(function() {
+  authorizeSpotify().then(value => {
+    TOKEN = value;
+  });
+
   $('form[name="artist-form"]').submit(function (e) {
     e.preventDefault();
     AUDIOOBJ.pause();
@@ -248,10 +279,10 @@ $(document).ready(function() {
     ARTISTIDS = [];
     $('.results').empty();
     $('.artistInfo').addClass('hidden');
-    
+
     var index,
         degree = 0;
-    
+
     searchArtistByName($(this).find('#artist-1-query').val(), index, degree);
     var artist2 = $(this).find('#artist-2-query').val();
     setTimeout (function () {
@@ -265,7 +296,7 @@ $(document).ready(function() {
     }, 2000);
   });
 
-  $('.tracks').click(function(e) { 
+  $('.tracks').click(function(e) {
      if(AUDIOOBJ){
       AUDIOOBJ.pause();
     }
