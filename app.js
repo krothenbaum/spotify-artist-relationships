@@ -25,7 +25,7 @@ async function searchArtistByName(artistName, index, degree) {
     }
 
     index = ARTISTS.findIndex(x => x.name == response.artists.items[0].name);
-    searchRecommendations(response.artists.items[0].id, index, degree);
+    await searchRecommendations(response.artists.items[0].id, index, degree);
 
   } catch (e) {
     console.log("ERROR: " + JSON.stringify(e));
@@ -47,7 +47,7 @@ async function searchArtistById(artistId, index, degree) {
       ARTISTS.push({'name': response.name, 'imports': [], 'artistId': response.id, 'imageURL': 'images/spotify.png'});
     }
     index = ARTISTS.findIndex(x => x.name == response.name);
-    searchRecommendations(response.id, index, degree);
+    await searchRecommendations(response.id, index, degree);
   } catch (e) {
     console.log('ERROR ' + JSON.stringify(e));
   }
@@ -299,7 +299,7 @@ $(document).ready(function() {
       renderCircle();
       $('.description').removeClass('hidden');
       $('.collapse').removeClass('in');
-    }, 2000);
+    }, 2500);
   });
 
   $('.tracks').click(function(e) {
