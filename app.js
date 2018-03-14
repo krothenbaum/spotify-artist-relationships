@@ -241,7 +241,7 @@ async function getTracks(artistId, index) {
     $(ARTISTS[index].tracks).each(function (){
       i++;
       tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="' + this.preview_url + '">' +
-      '<div class="trackNumber">' + i +'<i class="fa fa-play" aria-hidden="true"></i>' + '</div><div class="trackName">' + this.name + '</div></div>';
+      '<div class="trackNumber">' + i +'</div><i class="fa fa-play" aria-hidden="true"></i>' + '<div class="trackName">' + this.name + '</div></div>';
     });
     $('.tracks').html(tracksHTML);
     $('.artistInfo').removeClass('hidden');

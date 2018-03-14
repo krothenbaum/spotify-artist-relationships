@@ -142,7 +142,7 @@ form {
 }
 
 .left-inner-addon input {
-   padding-left: 30px;    
+   padding-left: 30px;
 }
 
 .left-inner-addon i {
@@ -165,7 +165,7 @@ form {
   border: 1px solid #1ed760;
   border-radius: 20px;
   height: 27px;
-  align-items: center; 
+  align-items: center;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 11px;
@@ -209,7 +209,6 @@ form {
   position: absolute;
   top: 0;
   margin: 0;
-  width: 256px;
   margin-left: 16px;
   display: inline-block;
 }
@@ -225,7 +224,7 @@ form {
   font-size: 14px;
   padding-top: 8px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #282828; 
+  border-bottom: 1px solid #282828;
 }
 
 .number {
@@ -238,7 +237,7 @@ form {
   display: inline-block;
 }
 
-.tracksList {  
+.tracksList {
   font-size: 14px;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -258,7 +257,7 @@ form {
 }
 
 .trackName {
-  margin-left: 32px;
+  margin-left: 16px;
   display: inline-block;
 }
 
@@ -331,11 +330,11 @@ form {
   .navbar {
     line-height: 24px;
   }
-  
+
   .navbar-toggle {
     margin-top: 22px;
   }
-  
+
   .navbar-collapse {
     margin-top: 8px;
     border: none;
