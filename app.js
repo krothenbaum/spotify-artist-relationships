@@ -240,8 +240,13 @@ async function getTracks(artistId, index) {
     $('.artistName').html('<h2>' + ARTISTS[index].name +'</h2>');
     $(ARTISTS[index].tracks).each(function (){
       i++;
-      tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="' + this.preview_url + '">' +
-      '<div class="trackNumber">' + i +'</div><i class="fa fa-play" aria-hidden="true"></i>' + '<div class="trackName">' + this.name + '</div></div>';
+      if(this.preview_url) {
+        tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="' + this.preview_url + '">' +
+        '<div class="trackNumber">' + i +'</div><i class="fa fa-play" aria-hidden="true"></i>' + '<div class="trackName">' + this.name + '</div></div>';
+      } else {
+        tracksHTML = tracksHTML + '<div class="tracksList truncate" id="' + this.id + '" src="">' +
+        '<div class="trackNumber">' + i +'</div><i class="fa fa-ban" aria-hidden="true"></i>' + '<div class="trackName">' + this.name + '</div></div>';
+      }
     });
     $('.tracks').html(tracksHTML);
     $('.artistInfo').removeClass('hidden');
