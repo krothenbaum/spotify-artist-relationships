@@ -282,6 +282,11 @@ async function authorizeSpotify() {
   }
 }
 
+async function searchArtists(artist1, artist2, index, degree) {
+  await searchArtistByName(artist1, index, degree);
+  await searchArtistByName(artist2, index, degree);
+}
+
 $(document).ready(function() {
   authorizeSpotify().then(value => {
     TOKEN = value;
@@ -298,8 +303,8 @@ $(document).ready(function() {
     var index,
         degree = 0;
 
-    searchArtistByName($(this).find('#artist-1-query').val(), index, degree);
-    searchArtistByName($(this).find('#artist-2-query').val(), index, degree);
+    searchArtists($(this).find('#artist-1-query').val(), $(this).find('#artist-2-query').val(), index, degree);
+
     setTimeout (function () {
       renderCircle();
       $('.description').removeClass('hidden');
